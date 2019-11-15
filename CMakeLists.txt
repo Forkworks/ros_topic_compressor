@@ -73,11 +73,11 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(topic_compress_client          src/topic_compress_client.cpp)
-add_dependencies(topic_compress_client        ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+add_dependencies(topic_compress_client        ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PKG_BINARIES} ${catkin_EXPORTED_TARGETS} )
 target_link_libraries(topic_compress_client   ${catkin_LIBRARIES} )
 
 add_executable(topic_compress_server         src/topic_compress_server.cpp)
-add_dependencies(topic_compress_server       ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+add_dependencies(topic_compress_server       ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PKG_BINARIES} ${catkin_EXPORTED_TARGETS} )
 target_link_libraries(topic_compress_server  ${catkin_LIBRARIES} )
 
 #############
@@ -87,7 +87,16 @@ target_link_libraries(topic_compress_server  ${catkin_LIBRARIES} )
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
-## Mark executable scripts (Python etc.) for installation
+SET(BINARIES_INSTALL_DIR lib/topic_compressor)
+
+install(TARGETS topic_compress_client DESTINATION ${BINARIES_INSTALL_DIR})
+install(TARGETS topic_compress_server DESTINATION ${BINARIES_INSTALL_DIR})
+
+#foreach( appsourcefile ${PKG_BINARIES} )
+#    install(TARGETS "${appsourcefile}" DESTINATION ${BINARIES_INSTALL_DIR})
+#endforeach()
+
+ ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 # install(PROGRAMS
 #   scripts/my_python_script
