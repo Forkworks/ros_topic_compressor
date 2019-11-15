@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 2.8.3)
 project(topic_compressor)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu -Wl,-rpath,${TX2_ROOT_PATH}/lib/aarch64-linux-gnu")
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
+find_package(catkin REQUIRED COMPONENTS 
   roscpp
   topic_tools
   std_msgs
@@ -72,6 +72,10 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+
+message("[ROS_TOPIC_COMPRESSOR] Catkin lib path: ${catkin_LIBRARIES}")
+message("[ROS_TOPIC_COMPRESSOR] Boost lib path: ${Boost_LIBRARIES}")
+
 add_executable(topic_compress_client          src/topic_compress_client.cpp)
 add_dependencies(topic_compress_client        ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PKG_BINARIES} ${catkin_EXPORTED_TARGETS} )
 target_link_libraries(topic_compress_client   ${catkin_LIBRARIES} )
