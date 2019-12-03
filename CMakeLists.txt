@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 2.8.3)
 project(topic_compressor)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu -Wl,-rpath,${TX2_ROOT_PATH}/lib/aarch64-linux-gnu")
+if(CROSSCOMPILE)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu -Wl,-rpath,${TX2_ROOT_PATH}/lib/aarch64-linux-gnu")
+else()
+	add_compile_options(-std=c++11)
+endif()
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
