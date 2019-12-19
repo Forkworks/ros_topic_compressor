@@ -77,9 +77,6 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 
-message("[ROS_TOPIC_COMPRESSOR] Catkin lib path: ${catkin_LIBRARIES}")
-message("[ROS_TOPIC_COMPRESSOR] Boost lib path: ${Boost_LIBRARIES}")
-
 add_executable(topic_compress_client          src/topic_compress_client.cpp)
 add_dependencies(topic_compress_client        ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PKG_BINARIES} ${catkin_EXPORTED_TARGETS} )
 target_link_libraries(topic_compress_client   ${catkin_LIBRARIES} )
