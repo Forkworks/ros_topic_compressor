@@ -3,7 +3,7 @@ project(topic_compressor)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 if(CROSSCOMPILE)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/aarch64-linux-gnu -Wl,-rpath,${TX2_ROOT_PATH}/lib/aarch64-linux-gnu")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wl,-rpath,${TX2_ROOT_PATH}/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE} -Wl,-rpath,${TX2_ROOT_PATH}/lib/${CMAKE_LIBRARY_ARCHITECTURE}")
 else()
 	add_compile_options(-std=c++11)
 endif()
